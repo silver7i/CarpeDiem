@@ -1,20 +1,20 @@
 T = int(input())
-
+ 
 for tc in range(1, T+1):
-    N, M = map(int, input().split())
+    N = int(input())
     arr = list(map(int, input().split()))
-
-    max_v, min_v = 0, int(1e9)
-
-    for i in range(N-M+1):
-        s = 0
-        for j in range(i, i+M):
-            s += arr[j]
-
-        if max_v < s:
-            max_v = s
-
-        if min_v > s:
-            min_v = s
-
-    print(f"#{tc} {max_v - min_v}")
+ 
+    max_cnt = 0
+ 
+    for n in range(N-1):
+        cnt = 0
+ 
+        for i in range(n+1, N):
+ 
+            if arr[n] > arr[i]:
+                cnt += 1
+ 
+            if max_cnt < cnt:
+                max_cnt = cnt
+ 
+    print(f"#{tc} {max_cnt}")
