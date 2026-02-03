@@ -26,34 +26,27 @@ for test_case in range(1, T + 1):
     # 근데 최소로 충전해야 하니까
     # k 길이 안에 충전할 수 있는게 있으면 가장 먼 곳에서 충전
 
-    far_elec = 0
     move_cnt = K
+
     charge_cnt = 0
-    i = 1
-    result = 1
-    while i < N+1:
-        if move_cnt < 1:
-            break
-
-        for j in range(move_cnt-1, 0, -1):      # j = 0, 1, 2 .. k-1
-            if bus_station[i+j] == 1:
-                far_elec = i+j
+    now = 0
+    while now + K < N:
+        found_station = False
+        for j in range(K, 0, -1):      # j = 0, 1, 2 .. k-1
+            # 가장 먼 충전소를 발견하면 현재 위치를 옮김
+            if bus_station[now+j] == 1:
+                now = now+j
+                    # 내 생각에는 움직일 수 있는 값이 남아있으면 추가로 k를 더하는 건줄 알았는데
+                    # move_cnt 값 제어하는게 없어야 정답이 되는거면 그냥 '가득이요~' 하고 가득 채우는거였나봄....
+                # move_cnt -= (far_elec - now)  
+                # move_cnt += K                 
+                charge_cnt += 1
+                found_station = True
                 break
-            else:
-                far_elec = 0
 
-        if far_elec != 0:
-            move_cnt -= (far_elec - i)
-            move_cnt += K
-            charge_cnt += 1
-            
-            i = far_elec
-
-        elif far_elec == 0 and i < N or move_cnt <= 0:
-            result = 0
+        if not found_station:
+            charge_cnt = 0
             break
 
-    if K < 1:
-        print(f'#{test_case} {result}')
-    else:
-        print(f'#{test_case} {charge_cnt}')
+    print(f'#{test_case} {charge_cnt}')
+    
