@@ -10,3 +10,40 @@ sys.stdin = open(file_path, "r")
 
 
 ###############################
+
+
+T = int(input())
+for test_case in range(1, T + 1):
+    N, K = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+
+    # result = 0
+    # for i in range(N):
+    #     col_cnt = 0
+    #     row_cnt = 0
+    #     for j in range(N):
+    #         if arr[i][j] == 1:
+    #             col_cnt += 1
+    #             if col_cnt > 3:
+    #                 col_cnt = 0
+    #             elif j == N-1 and col_cnt == 3:
+    #                 result += 1
+    #         else:
+    #             if col_cnt == 3:
+    #                 result += 1
+    #             else:
+    #                 col_cnt = 0
+            
+    #         if arr[j][i] == 1:
+    #             row_cnt += 1
+    #             if row_cnt > 3:
+    #                 row_cnt = 0
+    #             elif j == N-1 and row_cnt == 3:
+    #                 result += 1
+    #         else:
+    #             if row_cnt == 3:
+    #                 result += 1
+    #             else:
+    #                 row_cnt = 0
+
+    # print(f'#{test_case} {result}')
