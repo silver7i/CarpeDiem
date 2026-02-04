@@ -8,6 +8,32 @@
 ---
 ### 카운팅 정렬
 항목들의 순서를 결정하기 위해 집합에 각 항목이 몇개씩 있는지 세는 작업을 하여 선형 시간에 정렬하는 효율적인 방식
+```
+# 계수정렬 (counting sort)
+
+# 3 8 5 2 5 7 2 4 입력시 counting sort
+# n개의 숫자 입력받은후 O(n)의 속도로 정렬하기 ( 입력값은 1<= 입력값 <= 9 가정하고 문제풀이 )
+n = int(input())
+b = list(map(int,input().split()))
+bucket=[0]*10
+
+# DAT 구성하기
+for i in b:
+    bucket[i] += 1
+
+# 누적합 구하기
+for i in range(1, len(bucket)):
+    bucket[i] += bucket[i-1]
+
+# 값 넣기
+result=[0]*n
+for i in range(n):
+    bucket[b[i]] -= 1  # 버켓의 값 하나 빼주고
+    index = bucket[b[i]]  # result 배열의 몇번 인덱스에  값 넣을지 확인 후
+    result[index] = b[i]  # result 배열에 원본 값 넣기
+
+print(*result)
+```
 
 ---
 

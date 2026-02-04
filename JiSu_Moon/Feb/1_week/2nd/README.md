@@ -27,6 +27,7 @@ time complexity (누구의 코드가 더 빠르게 문제 해결)
 
 ### 정렬
 2개 이상의 자료를 키(특정 기준)에 의해 작은 값부터 큰 값 혹은 그 반대의 순서대로 재배열
+```
 1. 버블 정렬
 arr = [6, 3, 87, 3, 23, 4]
 for e in range(len(arr)-1, 0, -1):  # 앞이던 뒤던 똑같음
@@ -34,7 +35,9 @@ for e in range(len(arr)-1, 0, -1):  # 앞이던 뒤던 똑같음
         if arr[c+1] < arr[c]:
             arr[c+1], arr[c] = arr[c], arr[c+1]
 print(arr)
+```
 
+```
 2. 선택 정렬
 arr = [6, 3, 87, 3, 23, 4]
 for i in range(len(arr)):
@@ -42,7 +45,9 @@ for i in range(len(arr)):
         if arr[i] > arr[j]:
             arr[i], arr[j] = arr[j], arr[i]
 print(arr)
+```
 
+```
 3. 삽입 정렬 (빈리스트 생성)
 arr = [6, 3, 87, 3, 23, 4]
 ret = []
@@ -52,6 +57,7 @@ for i in range(6):
         if ret[j] < ret[j-1]:
             ret[j], ret[j-1] = ret[j-1], ret[j]
 print(ret)
+```
 
 ---
 
