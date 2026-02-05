@@ -8,6 +8,10 @@
 ---
 ### 2차원 배열
 
+```
+arr = [list(map(int, input().split())) for _ in range(n)]
+arr = [[0]*x for _ in range(y)]
+```
 
 ---
 
