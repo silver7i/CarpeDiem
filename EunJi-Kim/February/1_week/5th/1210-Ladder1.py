@@ -32,6 +32,8 @@ for test_case in range(1, T + 1):
         if arr[now_i][i] == 2:
             now_j = i
             break
+
+    # 움직이고 있음을 알리는 변수
     move = 0
     while now_i > 0:
         # 왼쪽 오른쪽을 보면서 1을 찾음
@@ -39,10 +41,9 @@ for test_case in range(1, T + 1):
 
         # 오른쪽이 없으면 왼쪽 보고
         # 왼쪽도 없으면 위로 가
-        # 오른쪽으로 가고 있었으면
+        # 좌/우로 가고 있었으면
         # 다음은 위로 가
 
-        # 지금 위치에서 direction 방향의 인덱스에 값이 있으면
         # 왼쪽 끝, 오른쪽 끝 범위 제한 두고, 1을 찾으면
         if now_i + di[direction] < N and now_j + dj[direction] < N \
                 and now_i + di[direction] >= 0 and now_j + dj[direction] >= 0 \
@@ -57,11 +58,11 @@ for test_case in range(1, T + 1):
                 direction = 0
                 move = 0
         # 갈 곳이 없으면
+        # 방향을 바꾸고 위치값 변경
         else:
-            # 방향을 바꾸고 위치값 변경
-            # 좌우를 확인할때 움직이지 않고 있었다면
+            # 좌우를 확인할때 움직이지 않고 있었다면 좌로든 우로든 움직이지 않았다는 뜻
             if direction == direction % 2 and move == 0:
-                direction = (direction + 1) % 3     # direction = 0, 1
+                direction = (direction + 1) % 3     # direction = 0, 1, 2
             # 좌우 어디든 움직이고 있었다면 위로 가도록
             elif direction == direction % 2 and move != 0:
                 direction = 2
