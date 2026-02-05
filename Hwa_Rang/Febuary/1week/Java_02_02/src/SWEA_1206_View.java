@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+class SWEA_1206_View
+{
+    public static void main(String args[]) throws Exception
+    {
+         
+        Scanner sc = new Scanner(System.in);
+ 
+        for(int test_case = 1; test_case <= 10; test_case++)
+        {
+         
+            int N = sc.nextInt();
+            int[] arr = new int[N]; 
+            int max = 0;
+            for(int i=0; i<N; i++) {
+                arr[i] = sc.nextInt();
+ 
+            }
+ 
+ 
+ 
+            for(int i=2; i<N-2; i++) {
+                if(arr[i]>arr[i-2] && arr[i] > arr[i-1] && arr[i]>arr[i+1] && arr[i]>arr[i+2]) {
+                    max += arr[i] - Math.max(Math.max(arr[i-2], arr[i-1]), Math.max(arr[i+1], arr[i+2]));
+                }
+            }
+ 
+            System.out.println("#"+test_case+" "+max);
+ 
+        }
+    }
+}
