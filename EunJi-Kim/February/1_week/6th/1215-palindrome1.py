@@ -9,7 +9,7 @@ file_path.touch(exist_ok=True)  # 파일이 없으면 생성
 sys.stdin = open(file_path, "r")
 
 ###############################
-
+'''
 def find_palind(arr, find_len, i, j):
     is_palind = False
     for k in range(j, find_len // 2):
@@ -44,4 +44,62 @@ for test_case in range(1, T + 1):
         if C_is_palind:
             cnt_palind += 1
     print(cnt_palind)
+'''
 
+'''
+def find_palind_row(arr, find_len, i, j):
+    for k in range(find_len // 2):
+        if arr[i][j + k] != arr[i][j + (find_len - 1) - k]:  # 행 / 앞쪽 인덱스와 뒤쪽 인덱스 비교
+            return 0
+    return 1
+
+def find_palind_col(arr, find_len, i, j):
+    for k in range(find_len // 2):
+        if arr[j + k][i] != arr[j + (find_len - 1) - k][i]:  # 행 / 앞쪽 인덱스와 뒤쪽 인덱스 비교
+            return 0
+    return 1
+
+
+T = 10
+for test_case in range(1, T + 1):
+    find_len = int(input())
+    arr_size = 8
+    arr = [list(input()) for _ in range(arr_size)]
+    
+    # 첫번째 인덱스와 대치되는 반대 인덱스 값 비교
+    
+    cnt_palind = 0
+
+    for i in range(arr_size):
+        for j in range(arr_size - find_len + 1):
+            cnt_palind += find_palind_row(arr, find_len, i, j)    # 행        
+            cnt_palind += find_palind_col(arr, find_len, i, j)    # 열
+
+    print(f'#{test_case} {cnt_palind}')
+
+'''
+
+def find_palind(arr, find_len, i, j):
+    for k in range(find_len // 2):
+        if arr[i][j+k] != arr[i][j + (find_len - 1) - k]:  # 행 / 앞쪽 인덱스와 뒤쪽 인덱스 비교
+            return 0
+    return 1
+
+
+T = 10
+for test_case in range(1, T + 1):
+    find_len = int(input())
+    arr_size = 8
+    arr_R = [list(input()) for _ in range(arr_size)]
+    arr_C = list(zip(*arr_R))
+
+    # 첫번째 인덱스와 대치되는 반대 인덱스 값 비교
+    
+    cnt_palind = 0
+
+    for i in range(len(arr_R)):
+        for j in range(len(arr_R)-find_len+1):
+            cnt_palind += find_palind(arr_R, find_len, i, j)    # 행        
+            cnt_palind += find_palind(arr_C, find_len, i, j)    # 열
+
+    print(f'#{test_case} {cnt_palind}')
