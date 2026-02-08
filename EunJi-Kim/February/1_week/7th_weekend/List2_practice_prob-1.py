@@ -11,3 +11,16 @@ sys.stdin = open(file_path, "r")
 
 ###############################
 
+T = int(input())
+for test_case in range(1, T+1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+
+    sum = 0
+    for i in range(N):
+        sum += arr[i][i]
+        sum += arr[i][N-1-i]
+
+    sum -= arr[N//2][N//2]
+
+    print(sum)
