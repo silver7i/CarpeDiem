@@ -1,6 +1,7 @@
 # [S/W 문제해결 기본] 1일차 - View
 
 
+T = int(input())
 for tc in range(1, 11):
     N = int(input())  # 건물의 개수 N
     H = list(map(int, input().split()))  # 건물의 높이 H

@@ -1,5 +1,4 @@
-import sys
-sys.stdin=open('input.txt', 'r')
+# 두 개의 숫자열
 
 
 T = int(input())
