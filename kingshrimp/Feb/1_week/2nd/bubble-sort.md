@@ -28,3 +28,6 @@ for _ in range(len(array)-1):  # 전체 과정 반복
             array[i+1] = k
 print(array)
 ```
+
+---
+
