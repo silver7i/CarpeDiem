@@ -12,4 +12,21 @@ sys.stdin = open(file_path, "r")
 
 T = int(input())
 for test_case in range(1, T + 1):
-    pass
+    str1 = input()
+    str2 = input()
+
+    find = 0
+    for i in range(len(str2) - len(str1) + 1):
+        cnt = 0
+        for j in range(len(str1)):      # 찾는 문자
+            if str1[j] != str2[i+j]:
+                break
+            cnt += 1
+
+        if cnt == len(str1):
+            find = 1
+            break
+
+    result = 1 if find == 1 else 0
+
+    print(f'#{test_case} {result}')
