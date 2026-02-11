@@ -27,7 +27,8 @@ public class BOJ_7569_토마토 {
 		int[] dc = {0, 0, -1, 1, 0, 0};
 		
 		//매번 카피 뜨는 경우
-		//어디가 틀렸징
+		//
+		//답은 맞았으나 시간 초과 코드
 		int cnt = 0;
 		boolean isZero = false;
 		boolean fullTomato = false;
@@ -47,11 +48,18 @@ public class BOJ_7569_토마토 {
 							int nr = i+dr[d];
 							int nc = j+dc[d];
 							
-							if(nr >= 0 && nc >= 0 && nr < n*h && nc < m) {
-								if(!(map[nr][nc] == -1)) {
-									map[nr][nc] = 1;									
+							if(nr >= n*(i/n) && nc >= 0 && nr < n + n*(i/n) && nc < m && d<4) {
+								if(!(map[nr][nc] == -1) && map[nr][nc] == 0) {
+									map[nr][nc] = 1;
+//									System.out.println(Arrays.toString(map[nr])+" "+nr+" "+nc+"#"+cnt+" "+i+" "+j);
+								}
+							}else if(nr >= 0 && nc >= 0 && nr < n*h && nc < m && d >=4) {
+								if(!(map[nr][nc] == -1) && map[nr][nc] == 0) {
+									map[nr][nc] = 1;
+//									System.out.println(Arrays.toString(map[nr])+" "+nr+" "+nc+"#"+cnt);
 								}
 							}
+							
 						}
 					}
 				}
