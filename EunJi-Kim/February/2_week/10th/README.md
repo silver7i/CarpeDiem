@@ -1,5 +1,5 @@
 # TIL (Today I Learned)
-### Statck 1-1
+### Stack 1-1
 
 - 푼 문제       
     - 4871.그래프 경로
