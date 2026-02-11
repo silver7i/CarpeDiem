@@ -21,17 +21,20 @@ for test_case in range(1, T+1):
             adj_list[start].append(end) 
 
     stack = [0]
-    now = 0
+    visited = [0 for _ in range(node_num)]
+
     result = 0
     while stack: # stack이 차있는 동안 루프
+        now = stack.pop()
+
         if now == 99:
             result = 1
             break
         
-        for i in adj_list[now]: # 현 위치와 이어진 다음 노드들을 하나씩 빼와서
-            stack.append(i)     # 스택에 넣음
-
-        now = stack.pop()   # 다음 갈 위치 정함
+        if adj_list[now] and visited[now] == 0:  # 다음 노드가 존재하고, 간적 없는 노드일 때
+            for i in adj_list[now]: # 현 위치와 이어진 다음 노드들을 하나씩 빼와서
+                stack.append(i)     # 스택에 넣음
+            visited[now] = 1        # 지금 위치는 갔다고 표시
 
     print(f'#{test_case} {result}')
 
