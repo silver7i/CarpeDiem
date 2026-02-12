@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SWEA_25052_등산로 {
@@ -25,34 +27,37 @@ public class SWEA_25052_등산로 {
 					
 					int x = j;
 					int y = i;
-					int cnt = 0;
-					boolean move = false;
+					int cnt = 1;
 					while(true) {
-						int min = Integer.MAX_VALUE;
+						
+						Map<Integer, int[]> plus = new HashMap<>();
 						
 						for(int d=0; d<4; d++) {
 							int nr = y+dr[d];
 							int nc = x+dc[d];
 							
 							if(nr >=0 && nr < n && nc >=0 && nc <n) {
-								if(min > map[nr][nc] && map[y][x] > map[nr][nc]) {
-									min = map[y][x];
-									x = nc;
-									y = nr;
-									move = true;
-									System.out.println("#"+i+" "+j+"sss"+x+" "+y);
-									System.out.println();
+								if(map[y][x] > map[nr][nc]) {	
+									plus.put(map[nr][nc], new int[] {nr,nc});
 								} 
 							}
+							
 						}
 						
-						if(move) {
+						if(!plus.isEmpty()) {
+							int min = Integer.MAX_VALUE;
+							for(int num : plus.keySet()) {
+								if(num < min) min = num;
+							}
+							
+							y = plus.get(min)[0];
+							x = plus.get(min)[1];
 							cnt ++;
-							move = false;
 						}else {
 							if(max < cnt) max = cnt;
 							break;
 						}
+		
 					}
 					
 				}
