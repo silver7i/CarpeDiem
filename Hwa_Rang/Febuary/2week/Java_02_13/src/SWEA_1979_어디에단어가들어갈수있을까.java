@@ -76,12 +76,13 @@ public class SWEA_1979_어디에단어가들어갈수있을까 {
 						}
 						
 						else {
-							for(int t=j-1; t<k+j; t++) {
-								if(t == j-1 && map[i][t] == 1) break;
-								
-								if(map[i][t] == 1) {
-									sum++;
+							for(int t=j; t<k+j; t++) {
+								if(j+k < n && map[i][j-1] == 0 && map[i][j+k] == 0) {
+									if(map[i][t] == 1) {
+										sum++;
+									}
 								}
+								
 								else break;
 							}
 						}
@@ -100,14 +101,12 @@ public class SWEA_1979_어디에단어가들어갈수있을까 {
 							for(int t=j; t<=k; t++) {
 								if(map[t][i] == 1) {
 									sum ++;
-									System.out.println("1");
 								}	
 								else break;
 							}
 						}
 						
 						else if(j == n-k) {
-							System.out.println("2");
 							for(int t=j; t<k+j; t++) {
 								if(map[j-1][i] == 1 ) {
 									break; 
@@ -122,14 +121,14 @@ public class SWEA_1979_어디에단어가들어갈수있을까 {
 						}
 						
 						else {
-							System.out.println("3");
-							for(int t=j-1; t<k+j; t++) {
-								if(t == j-1 && map[t][i] == 1) break;
-								
-								if(map[t][i] == 1) {
-									sum++;
+							for(int t=j; t<k+j; t++) {
+								if(j+k < n && map[j-1][i] == 0 && map[j+k][i] == 0) {
+									if(map[t][i] == 1) {
+										sum++;
+									}
 								}
 								else break;
+									
 							}
 						}
 						
