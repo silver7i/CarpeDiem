@@ -1,0 +1,287 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SWEA_11315_오목판정{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int t = Integer.parseInt(sc.nextLine());
+		for (int tc = 1; tc <= t; tc++) {
+
+			int n = Integer.parseInt(sc.nextLine());
+
+			char[][] map = new char[n][n];
+
+			for (int i = 0; i < n; i++) {
+				map[i] = sc.nextLine().toCharArray();
+			}
+			
+			
+//			for(char[] c: map) {
+//				System.out.println(Arrays.toString(c));
+//			}
+			
+			boolean isFind = false;
+
+			if (n == 5) {
+				int[] dr1 = { -2, -1, 1, 2 };
+				int[] dc1 = { -2, -1, 1, 2 };
+
+				int[] dr2 = { -2, -1, 1, 2 };
+				int[] dc2 = { 2, 1, -1, -2 };
+
+				if (map[2][2] == 'o') {
+					int cnt = 0;
+					for (int d = 0; d < 4; d++) {
+						if (map[2+dr1[d]][2+dc1[d]] == 'o')
+							cnt++;
+						else {
+							cnt = 0;
+							break;
+						}
+					}
+					if (cnt == 4) {
+						isFind = true;
+						return;
+					}
+
+					for (int d = 0; d < 4; d++) {
+						if (map[2+dr2[d]][2+dc2[d]] == 'o')
+							cnt++;
+						else {
+							break;
+						}
+					}
+
+					if (cnt == 4) {
+						isFind = true;
+						System.out.println("여기는 들어옴");
+						return;
+					}
+				}
+
+				if (!isFind) {
+					for (int i = 0; i < n; i++) {
+						int cnt_row = 0;
+
+						// 가로 먼저 검사
+						for (int j = 0; j < n; j++) {
+							if (map[i][j] == 'o')
+								cnt_row++;
+							else
+								break;
+						}
+
+						if (cnt_row == 5) {
+							isFind = true;
+							break;
+						}
+
+						// 세로 검사
+						int cnt_col = 0;
+						for (int j = 0; j < n; j++) {
+							if (map[j][i] == 'o')
+								cnt_col++;
+							else
+								break;
+						}
+
+						if (cnt_col == 5) {
+							isFind = true;
+							break;
+						}
+					}
+
+				}
+			} // if(n==5)
+
+			else {
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < n; j++) {
+						int cnt_row = 0;
+						int cnt_col = 0;
+						int cnt = 0;
+						if (j == 0) {
+							if (map[i][5] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[5][i] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[j][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[5][5] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[k][k] == 'o')
+										cnt++;
+									else
+										break;
+								}
+							}
+
+							if (cnt == 5) {
+								isFind = true;
+								break;
+							}
+							
+							//왼쪽 하단 꼭짓점 대각선 시작
+							if(map[n-1][j] == 'o' && map[n-6][5] != 'o') {
+								for(int k=0; k<5; k++) {
+									if(map[n-1-k][k] == 'o') cnt++;
+									else break;
+								}
+								
+								if(cnt == 5) {
+									isFind = true;
+									break;
+								}
+							}
+							
+						} // if j==0
+						
+						//오른쪽 상단 꼭짓점 대각선 시작
+						else if(j == n-1) {
+							if(j-5 >= 0 && map[i][j-5] != 'o') {
+								for(int k=j; k>j-5; k--) {
+									if(map[i][k] == 'o') cnt++;
+									else break;
+								}
+								
+								if(cnt == 5) {
+									isFind = true;
+									break;
+								}
+							}
+						}
+						
+						
+
+						else if (j == n - 5) {
+							if (map[i][n - 6] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[n - 6][i] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[j][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+
+						} // else if
+						
+						else if(map[n-1][n-1] == 'o' && map[n-6][n-6] != 'o') {
+							for(int k=n-1; k<n-6; k--) {
+								if(map[k][k] == 'o') cnt++;
+								else break;
+							}
+							
+							if(cnt == 5) {
+								isFind = true;
+								break;
+							}
+							
+						}
+
+						else {
+							if (map[i][j - 1] != 'o' && map[i][j + 5] != 'o') {
+								for (int k = j; k < j + 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[j - 1][i] != 'o' && map[j + 5][i] != 'o') {
+								for (int k = j; j < j + 5; k++) {
+									if (map[k][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+							
+							if(i-1 >= 0 && i+5 < n && j-1 >= 0 && j+5 < n) {
+								if(map[i-1][j-1] != 'o' && map[i+5][j+5] != 'o') {
+									for(int k=0; k<5; k++) {
+										if(map[i+k][j+k] == 'o')cnt++;
+										else break;
+									}
+								}
+
+							}
+							
+							
+							else if(i-1 >= 0 && i+5 < n && j+1 < n && j-5 >= 0) {
+								if(map[i-1][j+1] != 'o' && map[i+5][j-5] != 'o') {
+									for(int k=0; k<5; k++) {
+										if(map[i+k][j-k] == 'o') cnt++;
+										else break;
+									}
+								}
+							}
+														
+							if(cnt == 5) {
+								isFind = true;
+								break;
+							}
+
+						}
+					}
+				}
+
+			}
+		if(isFind) System.out.println("#" + tc + " " + "YES");
+		else System.out.println("#" + tc + " " + "NO");
+			
+		}
+	}
+}

@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class BOJ_10163_색종이 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int[][] map = new int[1001][1001];
+		int n = sc.nextInt();
+		int[][] idx = new int [n][4];
+		
+		for(int t=1; t<=n; t++) {
+			int s_x = sc.nextInt();
+			int s_y = sc.nextInt();
+			int f_x = s_x+sc.nextInt();
+			int f_y = s_y+sc.nextInt();
+			
+			for(int i=s_y; i<f_y; i++) {
+				for(int j=s_x; j<f_x; j++) {
+					map[i][j] = t;
+				}
+			}
+		}
+		
+		for(int t=1; t<=n; t++) {
+			int count = 0;
+			
+		}
+	}
+}

@@ -1,0 +1,219 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SWEA_11315_오목판정 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int t = Integer.parseInt(sc.nextLine());
+		for (int tc = 1; tc <= t; tc++) {
+
+			int n = Integer.parseInt(sc.nextLine());
+
+			char[][] map = new char[n][n];
+
+			for (int i = 0; i < n; i++) {
+				map[i] = sc.nextLine().toCharArray();
+			}
+			
+			
+//			for(char[] c: map) {
+//				System.out.println(Arrays.toString(c));
+//			}
+			
+			boolean isFind = false;
+
+			if (n == 5) {
+				int[] dr1 = { -2, -1, 1, 2 };
+				int[] dc1 = { -2, -1, 1, 2 };
+
+				int[] dr2 = { -2, -1, 1, 2 };
+				int[] dc2 = { 2, 1, -1, -2 };
+
+				if (map[2][2] == 'o') {
+					int cnt = 0;
+					for (int d = 0; d < 4; d++) {
+						if (map[2+dr1[d]][2+dc1[d]] == 'o')
+							cnt++;
+						else {
+							cnt = 0;
+							break;
+						}
+					}
+					if (cnt == 4) {
+						isFind = true;
+						return;
+					}
+
+					for (int d = 0; d < 4; d++) {
+						if (map[2+dr2[d]][2+dc2[d]] == 'o')
+							cnt++;
+						else {
+							break;
+						}
+					}
+
+					if (cnt == 4) {
+						isFind = true;
+						return;
+					}
+				}
+
+				if (!isFind) {
+					for (int i = 0; i < n; i++) {
+						int cnt_row = 0;
+
+						// 가로 먼저 검사
+						for (int j = 0; j < n; j++) {
+							if (map[i][j] == 'o')
+								cnt_row++;
+							else
+								break;
+						}
+
+						if (cnt_row == 5) {
+							isFind = true;
+							break;
+						}
+
+						// 세로 검사
+						int cnt_col = 0;
+						for (int j = 0; j < n; j++) {
+							if (map[j][i] == 'o')
+								cnt_col++;
+							else
+								break;
+						}
+
+						if (cnt_col == 5) {
+							isFind = true;
+							break;
+						}
+					}
+
+				}
+			} // if(n==5)
+
+			else {
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < n; j++) {
+						int cnt_row = 0;
+						int cnt_col = 0;
+						int cnt = 0;
+						if (j == 0) {
+							if (map[i][5] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[5][i] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[j][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[5][5] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[k][k] == 'o')
+										cnt++;
+									else
+										break;
+								}
+							}
+
+							if (cnt == 5) {
+								isFind = true;
+								break;
+							}
+						} // if j==0
+
+						else if (j == n - 5) {
+							if (map[i][n - 6] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[n - 6][i] != 'o') {
+								for (int k = 0; k < 5; k++) {
+									if (map[j][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+
+						} // else if
+
+						else {
+							if (map[i][j - 1] != 'o' && map[i][j + 5] != 'o') {
+								for (int k = j; k < j + 5; k++) {
+									if (map[i][k] == 'o')
+										cnt_row++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_row == 5) {
+								isFind = true;
+								break;
+							}
+
+							if (map[j - 1][i] != 'o' && map[j + 5][i] != 'o') {
+								for (int k = j; j < j + 5; k++) {
+									if (map[k][i] == 'o')
+										cnt_col++;
+									else
+										break;
+								}
+							}
+
+							if (cnt_col == 5) {
+								isFind = true;
+								break;
+							}
+
+						}
+					}
+				}
+
+			}
+			if (isFind) {
+				System.out.println("#" + tc + " " + "YES");
+			} else {
+				System.out.println("#" + tc + " " + "NO");
+			}
+		}
+	}
+}
