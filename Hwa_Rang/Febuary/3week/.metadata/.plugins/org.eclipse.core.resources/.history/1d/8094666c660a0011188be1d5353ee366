@@ -1,0 +1,21 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class BOJ_8979_올림픽 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		
+		Map<Integer, int[]> olympic = new HashMap<>();
+		
+		for(int i=0; i<n; i++) {
+			olympic.put(sc.nextInt(), new int[] {sc.nextInt(), sc.nextInt(), sc.nextInt()});
+		}
+		
+		
+		
+	}
+}

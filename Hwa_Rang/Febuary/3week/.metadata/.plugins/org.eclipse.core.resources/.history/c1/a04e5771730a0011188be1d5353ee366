@@ -1,0 +1,17 @@
+
+public class BOJ_1914_하노이탑 {
+	public static void main(String[] args) {
+		
+	}
+	
+	static void hanoi(int n, int start, int to, int via) {
+		if(n == 1) {
+			System.out.println(start+" "+to);
+			return;
+		}
+		
+		hanoi(n-1, start, via, to);
+		System.out.println(start+" "+to);
+		hanoi(n-1, via, to, start);
+	}
+}
