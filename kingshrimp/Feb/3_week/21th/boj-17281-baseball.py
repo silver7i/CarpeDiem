@@ -68,3 +68,4 @@ array = list(permutations(range(1, 9), 8))
 for players in array:
     lineup = list(p)
     lineup.insert(3, 0)
+ 
