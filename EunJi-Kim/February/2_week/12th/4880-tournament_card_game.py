@@ -22,34 +22,40 @@ A(-2, 1)
 B(-1, 2)
 '''
 
-def tournament(left_arr, right_arr):
-    # 만약 1:1 상황이 됐으면 가위바위보 결과 도출
-    if len(left_arr) == 1 and len(right_arr) == 1:
-        left = left_arr.pop()
-        right = right_arr.pop()
-        if left == right:
+stack = [] # 이긴 사람 넣기
+def tournament(arr, start, end):
+    mid = (start + end) // 2
+    left = arr[:mid+1]
+    right = arr[mid+1:]
+
+    if start == end:
+        return left
+    elif end - start == 1:
+        if left[0][1] == right[0][1]:
             return left
-        elif left - right in [-2, 1]:
+        elif left[0][1] - right[0][1] in [-2, 1]:
             return left
-        else:
+        elif left[0][1] - right[0][1] in [-1, 2]:
             return right
-    elif len(left_arr) == 1 and len(right_arr) != 1:
-        return left_arr.pop()
     
-    # 1:1이 안나왔으면 배열을 돌리면서 1:1이 되도록 설정
-    while len(left_arr) > 1:
-        if len(left_arr) >= 2:
-            left_arr.append(tournament(left_arr[:len(left_arr)//2], left_arr[len(left_arr)//2:]))
-        if len(right_arr) >= 2:
-            right_arr.append(tournament(right_arr[:len(right_arr)//2], right_arr[len(right_arr)//2:]))
-        
-        if len(left_arr) == 1 and len(right_arr) == 0:
-            return left_arr.pop()
+    while end - start > 1:
+        left_winner = tournament(left, 0, len(left)-1)
+        right_winner = tournament(right, 0, len(right)-1)  
+        final = tournament(left_winner + right_winner, 0, 1) 
+        return final   
+    
+    return 0
 
 T = int(input())
 for test_case in range(1, T+1):  
     N = int(input())
     arr = list(map(int, input().split()))
+    
+    cards = []
+    for i in range(N):
+        cards.append([i+1, arr[i]])
 
-    result = tournament(arr[:len(arr)//2], arr[len(arr)//2:])
-    print(result)
+    winner = tournament(cards, 0, N-1)    
+    print(f'#{test_case}', winner[0][0])
+    
+    
