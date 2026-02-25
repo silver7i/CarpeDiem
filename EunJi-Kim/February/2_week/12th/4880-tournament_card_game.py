@@ -22,7 +22,6 @@ A(-2, 1)
 B(-1, 2)
 '''
 
-stack = [] # 이긴 사람 넣기
 def tournament(arr, start, end):
     mid = (start + end) // 2
     left = arr[:mid+1]
@@ -51,6 +50,7 @@ for test_case in range(1, T+1):
     N = int(input())
     arr = list(map(int, input().split()))
     
+    # cards = [[사람식별, 카드종류], [...], ...]
     cards = []
     for i in range(N):
         cards.append([i+1, arr[i]])

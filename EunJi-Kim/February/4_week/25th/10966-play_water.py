@@ -11,52 +11,46 @@ sys.stdin = open(file_path, "r")
 
 ###############################
 
+
 deltas = [
     [0,1],
     [1,0],
     [0,-1],
     [-1,0],
-]
-
-def find_water(arr, now):
-    N, M = len(arr), len(arr[0])
-    now_i = now[0]
-    now_j = now[1]
-
-    direc_visited = [[0]*M for _ in range(N)]
-    q = [now]
-    direc_visited[now_i][now_j] = 1
-
-    while q:
-        for k in range(4):
-            cnt = 0
-            now = q.pop(0)
-            now_i, now_j = now[0], now[1]
-            
-            next_i = now_i + deltas[k][0]
-            next_j = now_j + deltas[k][1]
-
-            if arr[now_i][now_j] == 'W':
-                return find_water(arr, [next_i, next_j])
-            else:
-                if 0<=next_i<N and 0<=next_j<M and direc_visited[next_i][next_j] == 0:
-                    if arr[next_i][next_j] != 'W':
-                        q.append([next_i, next_j])
-                        direc_visited[next_i][next_j] = direc_visited[now_i][now_j] + 1
-                    else:
-                        return direc_visited[now_i][now_j]
-        cnt += find_water(arr, now)
-                
-    return cnt
+]    
 
 T = int(input())
 for tc in range(1, T+1):
     N, M = map(int, input().split())
     arr = [input() for _ in range(N)]
 
-    visited = [[0]*M for _ in range(N)]
+    visited = [[-1]*M for _ in range(N)]
+    q = []
+    front = 0
 
-    total = find_water(arr, [0, 0]) 
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == "W":
+                visited[i][j] = 0
+                q.append((i, j))
+
+    while front < len(q):
+        now = q[front]
+        front += 1
+        now_i, now_j = now[0], now[1]
+        
+        for k in range(4):
+            next_i = now_i + deltas[k][0]
+            next_j = now_j + deltas[k][1]
+
+            if 0 <= next_i < N and 0 <= next_j < M and visited[next_i][next_j] == -1:
+                visited[next_i][next_j] = visited[now_i][now_j] + 1
+                q.append((next_i, next_j))
+
+    total = 0
+    for i in range(N):
+        for j in range(M):
+            if visited[i][j] != -1:
+                total += visited[i][j]
 
     print(f'#{tc}', total)
-            
