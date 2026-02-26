@@ -17,6 +17,8 @@ for tc in range(1, T+1):
     N, M, L = map(int, input().split()) # 노드 개수, 리프 노드 개수, 출력한 노드 번호
     arr = [list(map(int, input().split()))for _ in range(M)]   # [노드번호, 자연수]
 
-    print(arr)
+    # 일단 이진 트리 만들어서 리프 노드 숫자 넣기
+    # 현재 노드 번호의 값은
+    # 왼쪽 자식 now * 2 + 오른쪽 자식 now * 2 + 1
 
     print(f'#{tc}', )
