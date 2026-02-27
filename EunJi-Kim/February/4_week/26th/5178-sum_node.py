@@ -20,5 +20,22 @@ for tc in range(1, T+1):
     # 일단 이진 트리 만들어서 리프 노드 숫자 넣기
     # 현재 노드 번호의 값은
     # 왼쪽 자식 now * 2 + 오른쪽 자식 now * 2 + 1
+    # 후위연산으로 부모 노드 값 저장
+    # 끝 노드부터 탐색해보자
 
+    now = -1
+    tree = [0] * (N + 1)
+    for i in range(M):
+        tree[arr[i][0]] = arr[i][1]
+        if now < arr[i][0]:
+            now = arr[i][0] 
+
+    print(now)
+    while now > 0:
+        print(now, now-1)
+        arr[now//2] = arr[now - 1] + arr[now]
+        now -= 2 
+        print(now)
+
+    print(tree)
     print(f'#{tc}', )
