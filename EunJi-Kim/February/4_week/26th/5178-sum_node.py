@@ -30,12 +30,12 @@ for tc in range(1, T+1):
         if now < arr[i][0]:
             now = arr[i][0] 
 
-    print(now)
     while now > 0:
-        print(now, now-1)
-        arr[now//2] = arr[now - 1] + arr[now]
-        now -= 2 
-        print(now)
+        if now % 2 != 0:
+            tree[now//2] = tree[now - 1] + tree[now]
+            now -= 2 
+        else:
+            tree[now//2] = tree[now]
+            now -= 1
 
-    print(tree)
-    print(f'#{tc}', )
+    print(f'#{tc}', tree[L])
