@@ -9,9 +9,10 @@ file_path.touch(exist_ok=True)  # 파일이 없으면 생성
 # 2. 파일 읽기 연동
 sys.stdin = open(file_path, "r")
 
+
 ###############################
 
-#1. stack 없이 재귀함수 방법
+#1. dfs - stack 없이 재귀함수 방법
 '''
 import sys
 input = sys.stdin.readline
@@ -63,6 +64,8 @@ while 1:
 '''
 
 
+# 2. dfs - stack 사용 방법
+'''
 import sys
 input = sys.stdin.readline
 
@@ -79,17 +82,14 @@ deltas = [
 
 def dfs(i, j):
     while stack:
+        now_i, now_j = stack.pop()
         for k in range(8):
-            ni = i + deltas[k][0]
-            nj = j + deltas[k][1]
+            ni = now_i + deltas[k][0]
+            nj = now_j + deltas[k][1]
             if 0<=ni<h and 0<=nj<w and not visited[ni][nj]:
                 if arr[ni][nj] == 1:
                     stack.append([ni, nj])
                     visited[ni][nj] = True
-        
-        now_i, now_j = stack.pop()
-        dfs(now_i, now_j)
-        
 
 
 while 1:
@@ -101,6 +101,7 @@ while 1:
     
     visited = [[False] * w for _ in range(h)]
     stack= []
+    cnt = 0
 
     for i in range(h):
         for j in range(w):
@@ -108,3 +109,53 @@ while 1:
                 visited[i][j] = True
                 stack.append([i, j])
                 dfs(i, j)
+                cnt += 1
+
+    print(cnt)
+'''
+
+# bfs - queue 사용 방법
+
+deltas = [
+    [0, 1],     # 동
+    [1, 1],     # 동남
+    [1, 0],     # 남
+    [1, -1],    # 남서
+    [0, -1],    # 서
+    [-1, -1],   # 서북
+    [-1, 0],    # 북
+    [-1, 1],    # 북동
+]
+
+def bfs(i, j, arr, visited):
+    queue = [(i, j)]
+    visited[i][j] = True
+
+    while queue:
+        now_i, now_j = queue.pop(0)
+        for k in range(8):
+            ni= now_i + deltas[k][0]
+            nj= now_j + deltas[k][1]
+            if 0 <= ni < h and 0 <= nj < w:
+                if not visited[ni][nj] and arr[ni][nj] == 1:
+                    queue.append((ni, nj))
+                    visited[ni][nj] = True
+
+
+while 1:
+    w, h = map(int, input().split())
+    if w == 0 and h == 0:
+        break
+
+    arr = [list(map(int, input().split())) for _ in range(h)]
+    
+    visited = [[False] * w for _ in range(h)]
+    cnt = 0
+
+    for i in range(h):
+        for j in range(w):
+            if arr[i][j] == 1 and not visited[i][j]:
+                bfs(i, j, arr, visited)
+                cnt += 1
+
+    print(cnt)
