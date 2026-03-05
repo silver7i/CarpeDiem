@@ -13,12 +13,15 @@ sys.stdin = open(file_path, "r")
 
 def dfs(idx, count):
     global min_diff
-
+    checked[idx] = True
+    if not start_team[idx]:
+        start_team[idx] = idx
     
     for i in range(idx, N):
         for j in range(i + 1, N):
             if not checked[j]:
                 checked[j] = True
+                if start_team[j]
                 dfs(j, count)
 
 N = int(input())
