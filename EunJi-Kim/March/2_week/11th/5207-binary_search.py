@@ -44,7 +44,7 @@ for tc in range(1, T + 1):
 
     A.sort()
 
-    # A를 순회하면서 B 이진 탐색
+    # B를 순회하면서 A이진 탐색
     cnt = 0
     for b in B:
         cnt += binary_search(A, b)
