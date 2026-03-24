@@ -1,1 +1,0 @@
-{"name":"Local: BOJ7576","url":"/Users/zoo/Desktop/CarpeDiem/zoo/Mar/1_week/9th/BOJ7576.py","tests":[{"id":1773067395427,"input":"6 4\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 1","output":"8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/zoo/Desktop/CarpeDiem/zoo/Mar/1_week/9th/BOJ7576.py","group":"local","local":true}
